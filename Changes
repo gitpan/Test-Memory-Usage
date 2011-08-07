@@ -1,5 +1,12 @@
 Revision history for Test-Memory-Usage
 
+0.0.2     2011-08-07 22:55:47 Europe/London
+
+ - Add memory_stack_ok() and update tests
+ - Add missing prereq for Test::Most
+ - POD layout tweaks
+ - dzil.ini setup tweaks
+
 0.0.1     2011-08-01 15:37:46 Europe/London
 
  - initial release

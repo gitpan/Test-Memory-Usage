@@ -11,7 +11,9 @@ use ExtUtils::MakeMaker 6.30;
 my %WriteMakefileArgs = (
   'ABSTRACT' => 'make sure code doesn\'t unexpectedly eat all your memory',
   'AUTHOR' => 'Chisel <chisel@chizography.net>',
-  'BUILD_REQUIRES' => {},
+  'BUILD_REQUIRES' => {
+    'Test::Most' => '0'
+  },
   'CONFIGURE_REQUIRES' => {
     'ExtUtils::MakeMaker' => '6.30'
   },
@@ -22,7 +24,7 @@ my %WriteMakefileArgs = (
   'PREREQ_PM' => {
     'Memory::Usage' => '0'
   },
-  'VERSION' => '0.0.1',
+  'VERSION' => '0.0.2',
   'test' => {
     'TESTS' => 't/*.t'
   }

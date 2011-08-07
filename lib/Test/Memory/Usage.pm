@@ -1,8 +1,8 @@
 package Test::Memory::Usage;
-BEGIN {
-  $Test::Memory::Usage::VERSION = '0.0.1';
+{
+  $Test::Memory::Usage::VERSION = '0.0.2';
 }
-BEGIN {
+{
   $Test::Memory::Usage::DIST = 'Test-Memory-Usage';
 }
 # ABSTRACT: make sure code doesn't unexpectedly eat all your memory
@@ -14,7 +14,7 @@ use Test::Builder;
 use Sub::Uplevel qw( uplevel );
 use base qw( Exporter );
 use vars qw( $Tester $mu $first_state_index);
-our @EXPORT = qw(memory_virtual_ok memory_rss_ok memory_usage_ok memory_usage_start);
+our @EXPORT = qw(memory_virtual_ok memory_rss_ok memory_stack_ok memory_usage_ok memory_usage_start);
 
 
 sub import {
@@ -41,17 +41,20 @@ sub memory_usage_ok {
     my $percentage_allowed = shift;
     memory_virtual_ok($percentage_allowed);
     memory_rss_ok($percentage_allowed);
+    memory_stack_ok($percentage_allowed);
 }
 
 sub memory_virtual_ok {
     return _growth_ok('virtual', 2, shift);
 }
 
-
 sub memory_rss_ok {
     return _growth_ok('RSS', 3, shift);
 }
 
+sub memory_stack_ok {
+    return _growth_ok('data/stack', 2, shift);
+}
 
 sub _percentage_growth {
     my ($start, $end) = @_;
@@ -114,7 +117,7 @@ Test::Memory::Usage - make sure code doesn't unexpectedly eat all your memory
 
 =head1 VERSION
 
-version 0.0.1
+version 0.0.2
 
 =head1 SYNOPSIS
 
@@ -159,15 +162,15 @@ Test::Memory::Usage exports the following subs automatically:
 
 =item memory_rss_ok
 
+=item memory_stack_ok
+
 =back
 
 =head1 METHODS
 
 The module provides the following methods:
 
-=over 4
-
-=item * memory_usage_start
+=head2 memory_usage_start
 
 This method records the current memory usage and flags it to be used for any
 growth tests later in the script.
@@ -180,13 +183,13 @@ This is useful if you want to compare the usage after you've performed a
 certain amount of minimum setup before the area(s) of code that you want to
 verify memory usage for.
 
-=item * memory_usage_ok($percentage_limit)
+=head2 memory_usage_ok($percentage_limit)
 
 This calls the C<memory_virtual_ok()> and C<memory_rss_ok()> functions.
 
 If not provided C<$percentage_limit> defaults to '10'.
 
-=item * memory_virtual_ok($percentage_limit)
+=head2 memory_virtual_ok($percentage_limit)
 
 Runs the test to ensure that virtual memory usage hasn't grown more than
 C<$percentage_limit>
@@ -196,7 +199,7 @@ C<memory_usage_ok()> meets their testing needs.
 
 If not provided C<$percentage_limit> defaults to '10'.
 
-=item * memory_rss_ok($percentage_limit)
+=head2 memory_rss_ok($percentage_limit)
 
 Runs the test to ensure that RSS memory usage hasn't grown more than
 C<$percentage_limit>
@@ -206,7 +209,15 @@ C<memory_usage_ok()> meets their testing needs.
 
 If not provided C<$percentage_limit> defaults to '10'.
 
-=back
+=head2 memory_stack_ok($percentage_limit)
+
+Runs the test to ensure that data/stack memory usage hasn't grown more than
+C<$percentage_limit>
+
+This isn't usually called explicitly as most users will find
+C<memory_usage_ok()> meets their testing needs.
+
+If not provided C<$percentage_limit> defaults to '10'.
 
 =head1 SEE ALSO
 
