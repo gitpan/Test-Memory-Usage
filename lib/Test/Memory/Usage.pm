@@ -1,6 +1,6 @@
 package Test::Memory::Usage;
 {
-  $Test::Memory::Usage::VERSION = '0.0.2';
+  $Test::Memory::Usage::VERSION = '0.0.3';
 }
 {
   $Test::Memory::Usage::DIST = 'Test-Memory-Usage';
@@ -117,7 +117,7 @@ Test::Memory::Usage - make sure code doesn't unexpectedly eat all your memory
 
 =head1 VERSION
 
-version 0.0.2
+version 0.0.3
 
 =head1 SYNOPSIS
 

@@ -12,7 +12,8 @@ my %WriteMakefileArgs = (
   'ABSTRACT' => 'make sure code doesn\'t unexpectedly eat all your memory',
   'AUTHOR' => 'Chisel <chisel@chizography.net>',
   'BUILD_REQUIRES' => {
-    'Test::Most' => '0'
+    'Test::Most' => '0',
+    'Test::UseAllModules' => '0'
   },
   'CONFIGURE_REQUIRES' => {
     'ExtUtils::MakeMaker' => '6.30'
@@ -24,7 +25,7 @@ my %WriteMakefileArgs = (
   'PREREQ_PM' => {
     'Memory::Usage' => '0'
   },
-  'VERSION' => '0.0.2',
+  'VERSION' => '0.0.3',
   'test' => {
     'TESTS' => 't/*.t'
   }
