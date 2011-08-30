@@ -19,4 +19,4 @@ requires:
 resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Test-Memory-Usage
   repository: git://github.com/chiselwright/test-memory-usage.git
-version: 0.0.3
+version: 0.0.4
