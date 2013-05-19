@@ -1,6 +1,6 @@
 package Test::Memory::Usage;
 {
-  $Test::Memory::Usage::VERSION = '0.0.4.1';
+  $Test::Memory::Usage::VERSION = '0.0.5';
 }
 {
   $Test::Memory::Usage::DIST = 'Test-Memory-Usage';
@@ -105,10 +105,12 @@ END {
         if (not $Tester->has_plan);
 }
 
+
 1;
 # vim: ts=8 sts=4 et sw=4 sr sta
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -117,7 +119,7 @@ Test::Memory::Usage - make sure code doesn't unexpectedly eat all your memory
 
 =head1 VERSION
 
-version 0.0.4.1
+version 0.0.5
 
 =head1 SYNOPSIS
 
@@ -223,6 +225,33 @@ If not provided C<$percentage_limit> defaults to '10'.
 
 L<Memory::Usage>
 
+=head1 AUTHOR'S NOTES
+
+I still have some concerns over the benefit of this module for testing.
+
+While it behaved fairly well locally, the test reports for failures from
+L<cpantesters.org|http://cpantesters.org/distro/T/Test-Memory-Usage.html>
+demonstrated that either the approach is flawed in general, or that I'm just
+bad at writing portable tests.
+
+The module was briefly removed from the CPAN because I doubted the usefulness
+of this module and didn't want to muddy the waters with a potentially
+frustrating test module.
+
+It can sometimes be tricky to determine the right level of growth, if any,
+that you'll allow your process to have. Maybe my flaw was just that I set them
+all to be too strict.
+
+After receiving a tweet recently I decided to re-upload this module, and allow
+people to make their own choice.
+
+Any improvements to the module, or the test suite would be greatly
+appreciated. I wrote this module to attempt to prevent horrific memory leaks
+in some code I was maintaining, so this or something like this could be
+beneficial.
+
+Chisel, May 2013
+
 =head1 AUTHOR
 
 Chisel <chisel@chizography.net>
@@ -235,4 +264,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
